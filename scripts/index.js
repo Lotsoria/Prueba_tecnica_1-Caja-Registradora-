@@ -61,7 +61,7 @@ function retirar() {
                 pero si lo dejo como mayor o igual el error se eliminar, pero a la hora de visualizar los billetes 
                 me quedan como -1, pero en fin, solo dejo data de esto, por si sirve de algo.
                 */
-                if (dinero[i].cantidad >= 0 && dinero[i].valor <= monto) {
+                if (dinero[i].cantidad > 0 && dinero[i].valor <= monto) {
                     monto -= dinero[i].valor;
                     dinero[i].cantidad--;
                     mostrarEnLabel();
