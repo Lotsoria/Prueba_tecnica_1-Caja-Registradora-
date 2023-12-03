@@ -45,4 +45,29 @@ body .dineroContainer .monedas label {
 body .dineroContainer .total {
   font-size: 40px;
   font-weight: 600;
+}
+body .entregado {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 80%;
+  height: 300px;
+  gap: 10px;
+}
+body .entregado .billetes {
+  display: flex;
+  background: white;
+}
+body .entregado .billetes label {
+  padding: 20px;
+  border: 2px solid black;
+}
+body .entregado .monedas {
+  display: flex;
+  background: white;
+}
+body .entregado .monedas label {
+  padding: 20px;
+  border: 2px solid black;
 }/*# sourceMappingURL=styles.css.map */

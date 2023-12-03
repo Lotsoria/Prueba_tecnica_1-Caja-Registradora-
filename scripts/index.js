@@ -1,19 +1,20 @@
 //declaro el dinero indicado.
-let dinero = [{ valor: 500, cantidad: 10 },
-{ valor: 200, cantidad: 10 },
-{ valor: 100, cantidad: 20 },
-{ valor: 50, cantidad: 20 },
-{ valor: 20, cantidad: 20 },
-{ valor: 10, cantidad: 20 },
-{ valor: 5, cantidad: 20 },
-{ valor: 2, cantidad: 20 },
-{ valor: 1, cantidad: 10 },
-{ valor: 0.50, cantidad: 200 },
-{ valor: 0.20, cantidad: 200 },
-{ valor: 0.10, cantidad: 500 },
-{ valor: 0.05, cantidad: 500 },
-{ valor: 0.02, cantidad: 800 },
-{ valor: 0.01, cantidad: 1000 }
+let dinero = [
+{valor: 500, cantidad: 10, cont: 0 },
+{ valor: 200, cantidad: 10, cont: 0  },
+{ valor: 100, cantidad: 20, cont: 0 },
+{ valor: 50, cantidad: 20, cont: 0},
+{ valor: 20, cantidad: 20 , cont: 0},
+{ valor: 10, cantidad: 20, cont: 0 },
+{ valor: 5, cantidad: 20 , cont: 0},
+{ valor: 2, cantidad: 20, cont: 0 },
+{ valor: 1, cantidad: 10, cont: 0 },
+{ valor: 0.50, cantidad: 200 , cont: 0},
+{ valor: 0.20, cantidad: 200, cont: 0 },
+{ valor: 0.10, cantidad: 500 , cont: 0},
+{ valor: 0.05, cantidad: 500 , cont: 0},
+{ valor: 0.02, cantidad: 800, cont: 0 },
+{ valor: 0.01, cantidad: 1000 , cont: 0}
 ];
 
 
@@ -33,6 +34,19 @@ function mostrarEnLabel() {
     sumarDinero()
 }
 
+function mostrarEnLabelEntrega(a, i) {
+        let labelId = "entregado" + (i + 1);
+        let label = document.getElementById(labelId)
+        if (label) {
+            if (dinero[i].valor >= 2) {
+                label.textContent = (`Billetes de $${dinero[i].valor}: ${a}`);
+            }
+            else {
+                label.textContent = (`Monedas de $${dinero[i].valor}: ${a}`);
+            }
+        }
+
+}
 function sumarDinero() {
     var total = 0;
     for (let i = 0; i < dinero.length; i++) {
@@ -51,7 +65,7 @@ function retirar() {
         alert("Es necesario ingresar una cantida")
     } else {
         let i = 0;
-            while(i < dinero.length){
+        while(i < dinero.length){
             if (monto <= sumarDinero()) {
                 /*Dejare nota en esta parte, tengo un problema con los valores 0.05, 0.02 y 0.01
                 justamente con esos 3 los valores no son certeros por una centesima 
@@ -61,12 +75,17 @@ function retirar() {
                 pero si lo dejo como mayor o igual el error se eliminar, pero a la hora de visualizar los billetes 
                 me quedan como -1, pero en fin, solo dejo data de esto, por si sirve de algo.
                 */
-                if (dinero[i].cantidad > 0 && dinero[i].valor <= monto) {
-                    monto -= dinero[i].valor;
-                    dinero[i].cantidad--;
-                    mostrarEnLabel();
-
+               if (dinero[i].cantidad > 0 && dinero[i].valor <= monto) {
+                   monto -= dinero[i].valor;
+                   dinero[i].cantidad--;
+                   dinero[i].cont++;
+                   console.log(sumarDinero())
+                   mostrarEnLabel();
+                   mostrarEnLabelEntrega(dinero[i].cont, i);
+                //    console.log("se entregaron ", dinero[i].cont, " billetes de: ", dinero[i].valor)
                 } else {
+                    mostrarEnLabelEntrega(dinero[i].cont, i);
+                    dinero[i].cont = 0
                     i++;
                 }
             }
